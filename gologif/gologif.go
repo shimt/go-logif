@@ -265,6 +265,11 @@ func (l *logger) OutputLevel() logif.LogLevel {
 	return logif.LogLevel(atomic.LoadInt32(&l.outputLevel))
 }
 
+// ToGoLogger cast to logif.GoLogger
+func (l *logger) ToGoLogger() logif.GoLogger {
+	return l.entity
+}
+
 // New create new logger instance.
 func New(out io.Writer, prefix string, flag int) (l logif.Logger) {
 	return &logger{

@@ -69,6 +69,12 @@ type GoLogger interface {
 	Panicln(v ...interface{})
 }
 
+// GoLoggerCaster caster interface for GoLogger
+type GoLoggerCaster interface {
+	// ToGoLogger cast to GoLogger interface
+	ToGoLogger() (l GoLogger)
+}
+
 //GoLoggerModifier leveld logging modifier interface
 type GoLoggerModifier interface {
 	// SetFlags sets the output flags for the logger.
@@ -130,6 +136,12 @@ type LeveledLogger interface {
 	Errorln(v ...interface{})
 }
 
+// LeveledLoggerCaster caster interface for LeveledLogger
+type LeveledLoggerCaster interface {
+	// ToLeveledLogger cast to LeveledLogger interface
+	ToLeveledLogger() (l LeveledLogger)
+}
+
 //LeveledLoggerModifier leveld logging modifier interface
 type LeveledLoggerModifier interface {
 	// SetOutputLevel set output level
@@ -147,6 +159,10 @@ type Logger interface {
 
 // ToGoLogger cast to LevelLogger interface
 func ToGoLogger(v interface{}) (l GoLogger, ok bool) {
+	if c, f := v.(GoLoggerCaster); f {
+		return c.ToGoLogger(), true
+	}
+
 	l, ok = v.(GoLogger)
 	return
 }
@@ -159,6 +175,10 @@ func ToGoLoggerModifier(v interface{}) (l GoLoggerModifier, ok bool) {
 
 // ToLeveledLogger cast to LevelLogger interface
 func ToLeveledLogger(v interface{}) (l LeveledLogger, ok bool) {
+	if c, f := v.(LeveledLoggerCaster); f {
+		return c.ToLeveledLogger(), true
+	}
+
 	l, ok = v.(LeveledLogger)
 	return
 }
