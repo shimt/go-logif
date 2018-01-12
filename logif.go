@@ -145,15 +145,27 @@ type Logger interface {
 	LeveledLogger
 }
 
+// ToGoLogger cast to LevelLogger interface
+func ToGoLogger(v interface{}) (l GoLogger, ok bool) {
+	l, ok = v.(GoLogger)
+	return
+}
+
+// ToGoLoggerModifier cast to ToGoLoggerModifier interface
+func ToGoLoggerModifier(v interface{}) (l GoLoggerModifier, ok bool) {
+	l, ok = v.(GoLoggerModifier)
+	return
+}
+
 // ToLeveledLogger cast to LevelLogger interface
 func ToLeveledLogger(v interface{}) (l LeveledLogger, ok bool) {
 	l, ok = v.(LeveledLogger)
 	return
 }
 
-// ToGoLogger cast to LevelLogger interface
-func ToGoLogger(v interface{}) (l GoLogger, ok bool) {
-	l, ok = v.(GoLogger)
+// ToLeveledLoggerModifier cast to ToGoLoggerModifier interface
+func ToLeveledLoggerModifier(v interface{}) (l LeveledLoggerModifier, ok bool) {
+	l, ok = v.(LeveledLoggerModifier)
 	return
 }
 
