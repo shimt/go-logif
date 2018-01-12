@@ -5,6 +5,8 @@
 // Package logif is logging interface
 package logif
 
+import "io"
+
 //go:generate stringer -type=LogLevel
 
 // LogLevel is log message level
@@ -67,6 +69,24 @@ type GoLogger interface {
 	Panicln(v ...interface{})
 }
 
+//GoLoggerModifier leveld logging modifier interface
+type GoLoggerModifier interface {
+	// SetFlags sets the output flags for the logger.
+	SetFlags(flag int)
+
+	// Flags returns the output flags for the logger.
+	Flags()
+
+	// SetPrefix sets the output prefix for the logger.
+	SetPrefix(prefix string)
+
+	// Prefix returns the output prefix for the logger.
+	Prefix()
+
+	// SetOutput sets the output destination for the logger.
+	SetOutput(w io.Writer)
+}
+
 //LeveledLogger leveld logging interface
 type LeveledLogger interface {
 	// Debug write message(level=DEBUG) to the logger.
@@ -108,7 +128,10 @@ type LeveledLogger interface {
 	// Errorln write message(level=ERROR) to the logger.
 	// Arguments are handled in the manner of fmt.Println.
 	Errorln(v ...interface{})
+}
 
+//LeveledLoggerModifier leveld logging modifier interface
+type LeveledLoggerModifier interface {
 	// SetOutputLevel set output level
 	SetOutputLevel(l LogLevel)
 
