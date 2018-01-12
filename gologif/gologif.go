@@ -36,6 +36,7 @@ func (l *logger) SetFlags(flag int) {
 	l.entity.SetFlags(flag)
 }
 
+// Flags returns the output flags for the logger.
 func (l *logger) Flags() int {
 	return l.entity.Flags()
 }
