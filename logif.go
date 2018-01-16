@@ -33,14 +33,6 @@ const (
 
 // GoLogger minimum logging interface
 type GoLogger interface {
-	// Output writes the output for a logging event.
-	// The string s contains the text to print after the prefix specified
-	// by the flags of the Logger. A newline is appended if the last character
-	// of s is not already a newline.
-	// Calldepth is used to recover the PC and is provided for generality,
-	// although at the moment on all pre-defined paths it will be 2
-	Output(calldepth int, s string) error
-
 	// Print calls l.Output to print to the logger. Arguments are handled in the manner of fmt.Print.
 	Print(v ...interface{})
 	// Printf calls l.Output to print to the logger. Arguments are handled in the manner of fmt.Printf.
