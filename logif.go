@@ -12,6 +12,14 @@ import "io"
 // LogLevel is log message level
 type LogLevel int32
 
+// StringerFunc Stringer interface function
+type StringerFunc func() string
+
+// String get print value
+func (f StringerFunc) String() string {
+	return f()
+}
+
 const (
 	// DEBUG debug log level
 	DEBUG LogLevel = iota
