@@ -8,7 +8,7 @@ package logrusif
 import (
 	"sync/atomic"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	logif "github.com/shimt/go-logif"
 )
 
