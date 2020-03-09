@@ -30,7 +30,7 @@ func Test_logger_Debug(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.(logif.LeveledLoggerModifier).SetOutputLevel(logif.DEBUG)
+			l.SetOutputLevel(logif.DEBUG)
 			l.Debug(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -59,7 +59,7 @@ func Test_logger_Debugf(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.(logif.LeveledLoggerModifier).SetOutputLevel(logif.DEBUG)
+			l.SetOutputLevel(logif.DEBUG)
 			l.Debugf(tt.args.f, tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -86,7 +86,7 @@ func Test_logger_Debugln(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.(logif.LeveledLoggerModifier).SetOutputLevel(logif.DEBUG)
+			l.SetOutputLevel(logif.DEBUG)
 			l.Debugln(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -113,7 +113,7 @@ func Test_logger_Info(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.(logif.LeveledLoggerModifier).SetOutputLevel(logif.INFO)
+			l.SetOutputLevel(logif.INFO)
 			l.Info(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -142,7 +142,7 @@ func Test_logger_Infof(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.(logif.LeveledLoggerModifier).SetOutputLevel(logif.INFO)
+			l.SetOutputLevel(logif.INFO)
 			l.Infof(tt.args.f, tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -169,7 +169,7 @@ func Test_logger_Infoln(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.(logif.LeveledLoggerModifier).SetOutputLevel(logif.INFO)
+			l.SetOutputLevel(logif.INFO)
 			l.Infoln(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {

@@ -39,8 +39,8 @@ const (
 	MAXLEVEL LogLevel = iota - 1
 )
 
-// GoLogger minimum logging interface
-type GoLogger interface {
+// Logger minimum logging interface
+type Logger interface {
 	// Print calls l.Output to print to the logger. Arguments are handled in the manner of fmt.Print.
 	Print(v ...interface{})
 	// Printf calls l.Output to print to the logger. Arguments are handled in the manner of fmt.Printf.
@@ -67,12 +67,6 @@ type GoLogger interface {
 	// Panicln write message(level=PANIC) to the logger followed by a call to panic().
 	// Arguments are handled in the manner of fmt.Println.
 	Panicln(v ...interface{})
-}
-
-// GoLoggerCaster caster interface for GoLogger
-type GoLoggerCaster interface {
-	// ToGoLogger cast to GoLogger interface
-	ToGoLogger() (l GoLogger)
 }
 
 //GoLoggerModifier leveld logging modifier interface
@@ -136,12 +130,6 @@ type LeveledLogger interface {
 	Errorln(v ...interface{})
 }
 
-// LeveledLoggerCaster caster interface for LeveledLogger
-type LeveledLoggerCaster interface {
-	// ToLeveledLogger cast to LeveledLogger interface
-	ToLeveledLogger() (l LeveledLogger)
-}
-
 //LeveledLoggerModifier leveld logging modifier interface
 type LeveledLoggerModifier interface {
 	// SetOutputLevel set output level
@@ -149,48 +137,4 @@ type LeveledLoggerModifier interface {
 
 	// OutputLevel set output level
 	OutputLevel() LogLevel
-}
-
-// Logger logging interface
-type Logger interface {
-	GoLogger
-	LeveledLogger
-}
-
-// ToGoLogger cast to LevelLogger interface
-func ToGoLogger(v interface{}) (l GoLogger, ok bool) {
-	if c, f := v.(GoLoggerCaster); f {
-		return c.ToGoLogger(), true
-	}
-
-	l, ok = v.(GoLogger)
-	return
-}
-
-// ToGoLoggerModifier cast to ToGoLoggerModifier interface
-func ToGoLoggerModifier(v interface{}) (l GoLoggerModifier, ok bool) {
-	l, ok = v.(GoLoggerModifier)
-	return
-}
-
-// ToLeveledLogger cast to LevelLogger interface
-func ToLeveledLogger(v interface{}) (l LeveledLogger, ok bool) {
-	if c, f := v.(LeveledLoggerCaster); f {
-		return c.ToLeveledLogger(), true
-	}
-
-	l, ok = v.(LeveledLogger)
-	return
-}
-
-// ToLeveledLoggerModifier cast to ToGoLoggerModifier interface
-func ToLeveledLoggerModifier(v interface{}) (l LeveledLoggerModifier, ok bool) {
-	l, ok = v.(LeveledLoggerModifier)
-	return
-}
-
-// ToLogger cast to ToLogger interface
-func ToLogger(v interface{}) (l Logger, ok bool) {
-	l, ok = v.(Logger)
-	return
 }

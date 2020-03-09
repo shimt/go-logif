@@ -26,28 +26,29 @@ func init() {
 	}
 }
 
-type logger struct {
+// Logger is wrapper for Golang default logger (log.Logger).
+type Logger struct {
 	entity      *log.Logger
 	outputLevel int32
 }
 
 // SetFlags sets the output flags for the logger.
-func (l *logger) SetFlags(flag int) {
+func (l *Logger) SetFlags(flag int) {
 	l.entity.SetFlags(flag)
 }
 
 // Flags returns the output flags for the logger.
-func (l *logger) Flags() int {
+func (l *Logger) Flags() int {
 	return l.entity.Flags()
 }
 
 // SetPrefix sets the output prefix for the logger.
-func (l *logger) SetPrefix(prefix string) {
+func (l *Logger) SetPrefix(prefix string) {
 	l.entity.SetPrefix(prefix)
 }
 
 // Prefix returns the output prefix for the logger.
-func (l *logger) Prefix() string {
+func (l *Logger) Prefix() string {
 	return l.entity.Prefix()
 }
 
@@ -57,78 +58,78 @@ func (l *logger) Prefix() string {
 // of s is not already a newline.
 // Calldepth is used to recover the PC and is provided for generality,
 // although at the moment on all pre-defined paths it will be 2
-func (l *logger) Output(calldepth int, s string) error {
+func (l *Logger) Output(calldepth int, s string) error {
 	return l.entity.Output(calldepth, s)
 }
 
 // SetOutput sets the output destination for the logger.
-func (l *logger) SetOutput(w io.Writer) {
+func (l *Logger) SetOutput(w io.Writer) {
 	l.entity.SetOutput(w)
 }
 
 // Print calls l.Output to print to the logger. Arguments are handled in the manner of fmt.Print.
-func (l *logger) Print(v ...interface{}) {
+func (l *Logger) Print(v ...interface{}) {
 	l.entity.Print(v...)
 }
 
 // Printf calls l.Output to print to the logger. Arguments are handled in the manner of fmt.Printf.
-func (l *logger) Printf(format string, v ...interface{}) {
+func (l *Logger) Printf(format string, v ...interface{}) {
 	l.entity.Printf(format, v...)
 }
 
 // Println calls l.Output to print to the logger. Arguments are handled in the manner of fmt.Println.
-func (l *logger) Println(v ...interface{}) {
+func (l *Logger) Println(v ...interface{}) {
 	l.entity.Println(v...)
 }
 
 // Fatal write message(level=ERROR) to the logger followed by a call to os.Exit(1).
 // Arguments are handled in the manner of fmt.Print.
-func (l *logger) Fatal(v ...interface{}) {
+func (l *Logger) Fatal(v ...interface{}) {
 	l.entity.Fatal(v...)
 }
 
 // Fatalf write message(level=ERROR) to the logger followed by a call to os.Exit(1).
 // Arguments are handled in the manner of fmt.Printf.
-func (l *logger) Fatalf(format string, v ...interface{}) {
+func (l *Logger) Fatalf(format string, v ...interface{}) {
 	l.entity.Fatalf(format, v...)
 }
 
 // Fatalln iwrite message(level=ERROR) to the logger followed by a call to os.Exit(1).
 // Arguments are handled in the manner of fmt.Println.
-func (l *logger) Fatalln(v ...interface{}) {
+func (l *Logger) Fatalln(v ...interface{}) {
 	l.entity.Fatalln(v...)
 }
 
 // Panic write message(level=PANIC) to the logger followed by a call to panic().
 // Arguments are handled in the manner of fmt.Print.
-func (l *logger) Panic(v ...interface{}) {
+func (l *Logger) Panic(v ...interface{}) {
 	l.entity.Panic(v...)
 }
 
 // Panicf write message(level=PANIC) to the logger followed by a call to panic().
 // Arguments are handled in the manner of fmt.Printf.
-func (l *logger) Panicf(format string, v ...interface{}) {
+func (l *Logger) Panicf(format string, v ...interface{}) {
 	l.entity.Panicf(format, v...)
 }
 
-// Panic write message(level=PANIC) to the logger followed by a call to panic().
+// Panicln write message(level=PANIC) to the logger followed by a call to panic().
 // Arguments are handled in the manner of fmt.Print.
-func (l *logger) Panicln(v ...interface{}) {
+func (l *Logger) Panicln(v ...interface{}) {
 	l.entity.Panicln(v...)
 }
 
-func (l *logger) p(level logif.LogLevel, v []interface{}) {
+func (l *Logger) p(level logif.LogLevel, v []interface{}) {
 	v2 := make([]interface{}, 0, len(v)+1)
 	v2 = append(v2, levelStringWithSpace[level])
 	v2 = append(v2, v...)
 	l.Print(v2...)
 }
 
-func (l *logger) pf(level logif.LogLevel, format string, v []interface{}) {
+func (l *Logger) pf(level logif.LogLevel, format string, v []interface{}) {
 	l.Printf(levelStringWithSpace[level]+format, v...)
 }
 
-func (l *logger) pln(level logif.LogLevel, v []interface{}) {
+func (l *Logger) pln(level logif.LogLevel, v []interface{}) {
 	v2 := make([]interface{}, 0, len(v)+1)
 	v2 = append(v2, levelString[level])
 	v2 = append(v2, v...)
@@ -137,7 +138,7 @@ func (l *logger) pln(level logif.LogLevel, v []interface{}) {
 
 // Debug write message(level=DEBUG) to the logger.
 // Arguments are handled in the manner of fmt.Print.
-func (l *logger) Debug(v ...interface{}) {
+func (l *Logger) Debug(v ...interface{}) {
 	if l.OutputLevel() > logif.DEBUG {
 		return
 	}
@@ -147,7 +148,7 @@ func (l *logger) Debug(v ...interface{}) {
 
 // Debugf write message(level=DEBUG) to the logger.
 // Arguments are handled in the manner of fmt.Printf.
-func (l *logger) Debugf(format string, v ...interface{}) {
+func (l *Logger) Debugf(format string, v ...interface{}) {
 	if l.OutputLevel() > logif.DEBUG {
 		return
 	}
@@ -157,7 +158,7 @@ func (l *logger) Debugf(format string, v ...interface{}) {
 
 // Debugln write message(level=DEBUG) to the logger.
 // Arguments are handled in the manner of fmt.Println.
-func (l *logger) Debugln(v ...interface{}) {
+func (l *Logger) Debugln(v ...interface{}) {
 	if l.OutputLevel() > logif.DEBUG {
 		return
 	}
@@ -167,7 +168,7 @@ func (l *logger) Debugln(v ...interface{}) {
 
 // Info write message(level=INFO) to the logger.
 // Arguments are handled in the manner of fmt.Print.
-func (l *logger) Info(v ...interface{}) {
+func (l *Logger) Info(v ...interface{}) {
 	if l.OutputLevel() > logif.INFO {
 		return
 	}
@@ -177,7 +178,7 @@ func (l *logger) Info(v ...interface{}) {
 
 // Infof write message(level=INFO) to the logger.
 // Arguments are handled in the manner of fmt.Printf.
-func (l *logger) Infof(format string, v ...interface{}) {
+func (l *Logger) Infof(format string, v ...interface{}) {
 	if l.OutputLevel() > logif.INFO {
 		return
 	}
@@ -187,7 +188,7 @@ func (l *logger) Infof(format string, v ...interface{}) {
 
 // Infoln write message(level=INFO) to the logger.
 // Arguments are handled in the manner of fmt.Println.
-func (l *logger) Infoln(v ...interface{}) {
+func (l *Logger) Infoln(v ...interface{}) {
 	if l.OutputLevel() > logif.INFO {
 		return
 	}
@@ -197,7 +198,7 @@ func (l *logger) Infoln(v ...interface{}) {
 
 // Warn write message(level=WARN) to the logger.
 // Arguments are handled in the manner of fmt.Print.
-func (l *logger) Warn(v ...interface{}) {
+func (l *Logger) Warn(v ...interface{}) {
 	if l.OutputLevel() > logif.WARN {
 		return
 	}
@@ -207,7 +208,7 @@ func (l *logger) Warn(v ...interface{}) {
 
 // Warnf write message(level=WARN) to the logger.
 // Arguments are handled in the manner of fmt.Printf.
-func (l *logger) Warnf(format string, v ...interface{}) {
+func (l *Logger) Warnf(format string, v ...interface{}) {
 	if l.OutputLevel() > logif.WARN {
 		return
 	}
@@ -217,7 +218,7 @@ func (l *logger) Warnf(format string, v ...interface{}) {
 
 // Warnln write message(level=WARN) to the logger.
 // Arguments are handled in the manner of fmt.Println.
-func (l *logger) Warnln(v ...interface{}) {
+func (l *Logger) Warnln(v ...interface{}) {
 	if l.OutputLevel() > logif.WARN {
 		return
 	}
@@ -227,7 +228,7 @@ func (l *logger) Warnln(v ...interface{}) {
 
 // Error write message(level=ERROR) to the logger.
 // Arguments are handled in the manner of fmt.Print.
-func (l *logger) Error(v ...interface{}) {
+func (l *Logger) Error(v ...interface{}) {
 	if l.OutputLevel() > logif.ERROR {
 		return
 	}
@@ -237,7 +238,7 @@ func (l *logger) Error(v ...interface{}) {
 
 // Errorf write message(level=ERROR) to the logger.
 // Arguments are handled in the manner of fmt.Printf.
-func (l *logger) Errorf(format string, v ...interface{}) {
+func (l *Logger) Errorf(format string, v ...interface{}) {
 	if l.OutputLevel() > logif.ERROR {
 		return
 	}
@@ -247,7 +248,7 @@ func (l *logger) Errorf(format string, v ...interface{}) {
 
 // Errorln write message(level=ERROR) to the logger.
 // Arguments are handled in the manner of fmt.Println.
-func (l *logger) Errorln(v ...interface{}) {
+func (l *Logger) Errorln(v ...interface{}) {
 	if l.OutputLevel() > logif.ERROR {
 		return
 	}
@@ -256,23 +257,18 @@ func (l *logger) Errorln(v ...interface{}) {
 }
 
 // SetOutputLevel set output level
-func (l *logger) SetOutputLevel(level logif.LogLevel) {
+func (l *Logger) SetOutputLevel(level logif.LogLevel) {
 	atomic.StoreInt32(&l.outputLevel, int32(level))
 }
 
 // OutputLevel set output level
-func (l *logger) OutputLevel() logif.LogLevel {
+func (l *Logger) OutputLevel() logif.LogLevel {
 	return logif.LogLevel(atomic.LoadInt32(&l.outputLevel))
 }
 
-// ToGoLogger cast to logif.GoLogger
-func (l *logger) ToGoLogger() logif.GoLogger {
-	return l.entity
-}
-
 // New create new logger instance.
-func New(out io.Writer, prefix string, flag int) (l logif.Logger) {
-	return &logger{
+func New(out io.Writer, prefix string, flag int) *Logger {
+	return &Logger{
 		entity:      log.New(out, prefix, flag),
 		outputLevel: int32(logif.WARN),
 	}
