@@ -30,7 +30,7 @@ func Test_logger_Debug(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.SetOutputLevel(logif.DEBUG)
+			l.SetOutputLevel(DEBUG)
 			l.Debug(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -59,7 +59,7 @@ func Test_logger_Debugf(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.SetOutputLevel(logif.DEBUG)
+			l.SetOutputLevel(DEBUG)
 			l.Debugf(tt.args.f, tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -86,7 +86,7 @@ func Test_logger_Debugln(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.SetOutputLevel(logif.DEBUG)
+			l.SetOutputLevel(DEBUG)
 			l.Debugln(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -113,7 +113,7 @@ func Test_logger_Info(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.SetOutputLevel(logif.INFO)
+			l.SetOutputLevel(INFO)
 			l.Info(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -169,7 +169,7 @@ func Test_logger_Infoln(t *testing.T) {
 			b := &bytes.Buffer{}
 			l := New(b, "", log.LstdFlags)
 
-			l.SetOutputLevel(logif.INFO)
+			l.SetOutputLevel(INFO)
 			l.Infoln(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
@@ -336,5 +336,17 @@ func Test_logger_Errorln(t *testing.T) {
 				t.Errorf("logger.Errorln = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func Test_Logger_calldepth(t *testing.T) {
+	want := "gologif_test.go:"
+	b := &bytes.Buffer{}
+	l := New(b, "", Lshortfile)
+	l.Print("test")
+
+	got := b.String()
+	if !strings.HasPrefix(got, want) {
+		t.Errorf("got = %v, want prefix %v", got, want)
 	}
 }

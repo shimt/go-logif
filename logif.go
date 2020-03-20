@@ -76,19 +76,19 @@ type Logger interface {
 	Panicln(v ...interface{})
 }
 
-//GoLoggerModifier leveld logging modifier interface
-type GoLoggerModifier interface {
+//LoggerModifier leveld logging modifier interface
+type LoggerModifier interface {
 	// SetFlags sets the output flags for the logger.
 	SetFlags(flag int)
 
 	// Flags returns the output flags for the logger.
-	Flags()
+	Flags() int
 
 	// SetPrefix sets the output prefix for the logger.
 	SetPrefix(prefix string)
 
 	// Prefix returns the output prefix for the logger.
-	Prefix()
+	Prefix() string
 
 	// SetOutput sets the output destination for the logger.
 	SetOutput(w io.Writer)
