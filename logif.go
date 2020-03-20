@@ -9,7 +9,14 @@ import "io"
 
 //go:generate stringer -type=LogLevel
 
-// LogLevel is log message level
+// LogLevel importance of the message.
+//
+// importance becomes large in following order.
+//
+// 1) DEBUG
+// 2) INFO
+// 3) WARN
+// 4) ERROR
 type LogLevel int32
 
 // StringerFunc Stringer interface function
@@ -27,7 +34,7 @@ const (
 	MINLEVEL LogLevel = iota - 1
 	// INFO info log level
 	INFO LogLevel = iota
-	// WARN warnning log level
+	// WARN warning log level
 	WARN LogLevel = iota
 	// ERROR error log level
 	ERROR LogLevel = iota
@@ -48,13 +55,13 @@ type Logger interface {
 	// Println calls l.Output to print to the logger. Arguments are handled in the manner of fmt.Println.
 	Println(v ...interface{})
 
-	// Fatal write message(level=ERROR) to the logger followed by a call to os.Exit(1).
+	// Fatal write message(level=FATAL) to the logger followed by a call to os.Exit(1).
 	// Arguments are handled in the manner of fmt.Print.
 	Fatal(v ...interface{})
-	// Fatalf write message(level=ERROR) to the logger followed by a call to os.Exit(1).
+	// Fatalf write message(level=FATAL) to the logger followed by a call to os.Exit(1).
 	// Arguments are handled in the manner of fmt.Printf.
 	Fatalf(format string, v ...interface{})
-	// Fatalln iwrite message(level=ERROR) to the logger followed by a call to os.Exit(1).
+	// Fatalln iwrite message(level=FATAL) to the logger followed by a call to os.Exit(1).
 	// Arguments are handled in the manner of fmt.Println.
 	Fatalln(v ...interface{})
 

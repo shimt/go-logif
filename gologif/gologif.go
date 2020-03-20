@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package gologif is logif wrapper for log package
+// Package gologif is wrapper of a standard "log" package.
 package gologif
 
 import (
@@ -82,19 +82,19 @@ func (l *Logger) Println(v ...interface{}) {
 	l.entity.Println(v...)
 }
 
-// Fatal write message(level=ERROR) to the logger followed by a call to os.Exit(1).
+// Fatal write message(level=FATAL) to the logger followed by a call to os.Exit(1).
 // Arguments are handled in the manner of fmt.Print.
 func (l *Logger) Fatal(v ...interface{}) {
 	l.entity.Fatal(v...)
 }
 
-// Fatalf write message(level=ERROR) to the logger followed by a call to os.Exit(1).
+// Fatalf write message(level=FATAL) to the logger followed by a call to os.Exit(1).
 // Arguments are handled in the manner of fmt.Printf.
 func (l *Logger) Fatalf(format string, v ...interface{}) {
 	l.entity.Fatalf(format, v...)
 }
 
-// Fatalln iwrite message(level=ERROR) to the logger followed by a call to os.Exit(1).
+// Fatalln iwrite message(level=FATAL) to the logger followed by a call to os.Exit(1).
 // Arguments are handled in the manner of fmt.Println.
 func (l *Logger) Fatalln(v ...interface{}) {
 	l.entity.Fatalln(v...)
