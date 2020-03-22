@@ -176,10 +176,7 @@ func (l *Logger) Panicln(v ...interface{}) {
 }
 
 func (l *Logger) lp(level logif.LogLevel, v []interface{}) {
-	v2 := make([]interface{}, 0, len(v)+1)
-	v2 = append(v2, levelStringWithSpace[level])
-	v2 = append(v2, v...)
-	l.Output(4, fmt.Sprint(v2...))
+	l.Output(4, levelStringWithSpace[level]+fmt.Sprint(v...))
 }
 
 func (l *Logger) lpf(level logif.LogLevel, format string, v []interface{}) {
@@ -187,10 +184,7 @@ func (l *Logger) lpf(level logif.LogLevel, format string, v []interface{}) {
 }
 
 func (l *Logger) lpl(level logif.LogLevel, v []interface{}) {
-	v2 := make([]interface{}, 0, len(v)+1)
-	v2 = append(v2, levelString[level])
-	v2 = append(v2, v...)
-	l.Output(4, fmt.Sprintln(v2...))
+	l.Output(4, levelStringWithSpace[level]+fmt.Sprintln(v...))
 }
 
 // Debug write message(level=DEBUG) to the logger.

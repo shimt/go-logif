@@ -6,6 +6,7 @@ package gologif
 
 import (
 	"bytes"
+	"io/ioutil"
 	"log"
 	"strings"
 	"testing"
@@ -348,5 +349,29 @@ func Test_Logger_calldepth(t *testing.T) {
 	got := b.String()
 	if !strings.HasPrefix(got, want) {
 		t.Errorf("got = %v, want prefix %v", got, want)
+	}
+}
+
+func Benchmark_log_Print(b *testing.B) {
+	l := log.New(ioutil.Discard, "", LstdFlags)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		l.Print("test")
+	}
+}
+
+func Benchmark_gologif_Print(b *testing.B) {
+	l := New(ioutil.Discard, "", LstdFlags)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		l.Print("test")
+	}
+}
+
+func Benchmark_gologif_Error(b *testing.B) {
+	l := New(ioutil.Discard, "", LstdFlags)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		l.Error("test")
 	}
 }
