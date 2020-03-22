@@ -35,7 +35,6 @@ const (
 	Llongfile     = log.Llongfile
 	Lshortfile    = log.Lshortfile
 	LUTC          = log.LUTC
-	Lmsgprefix    = log.Lmsgprefix
 	LstdFlags     = log.LstdFlags
 )
 
@@ -81,11 +80,6 @@ func (l *Logger) SetPrefix(prefix string) {
 // Prefix returns the output prefix for the logger.
 func (l *Logger) Prefix() string {
 	return l.entity.Prefix()
-}
-
-// Writer returns the output destination for the logger.
-func (l *Logger) Writer() io.Writer {
-	return l.entity.Writer()
 }
 
 // Output writes the output for a logging event.
