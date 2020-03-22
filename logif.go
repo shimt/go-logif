@@ -19,29 +19,17 @@ import "io"
 // 4) ERROR
 type LogLevel int32
 
-// StringerFunc Stringer interface function
-type StringerFunc func() string
-
-// String get print value
-func (f StringerFunc) String() string {
-	return f()
-}
-
 const (
-	// DEBUG debug log level
+	// DEBUG debug message
 	DEBUG LogLevel = iota
-	// MINLEVEL min log level
+	// MINLEVEL minimum level
 	MINLEVEL LogLevel = iota - 1
-	// INFO info log level
+	// INFO informational message.
 	INFO LogLevel = iota
-	// WARN warning log level
+	// WARN warning message
 	WARN LogLevel = iota
-	// ERROR error log level
+	// ERROR error message
 	ERROR LogLevel = iota
-	// FATAL fatal log level
-	FATAL LogLevel = iota
-	// PANIC panic log level
-	PANIC LogLevel = iota
 	// MAXLEVEL max log level
 	MAXLEVEL LogLevel = iota - 1
 )

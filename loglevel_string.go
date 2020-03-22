@@ -4,20 +4,32 @@ package logif
 
 import "strconv"
 
+func _() {
+	// An "invalid array index" compiler error signifies that the constant values have changed.
+	// Re-run the stringer command to generate them again.
+	var x [1]struct{}
+	_ = x[DEBUG-0]
+	_ = x[MINLEVEL-0]
+	_ = x[INFO-2]
+	_ = x[WARN-3]
+	_ = x[ERROR-4]
+	_ = x[MAXLEVEL-4]
+}
+
 const (
 	_LogLevel_name_0 = "DEBUG"
-	_LogLevel_name_1 = "INFOWARNERRORFATALPANIC"
+	_LogLevel_name_1 = "INFOWARNERROR"
 )
 
 var (
-	_LogLevel_index_1 = [...]uint8{0, 4, 8, 13, 18, 23}
+	_LogLevel_index_1 = [...]uint8{0, 4, 8, 13}
 )
 
 func (i LogLevel) String() string {
 	switch {
 	case i == 0:
 		return _LogLevel_name_0
-	case 2 <= i && i <= 6:
+	case 2 <= i && i <= 4:
 		i -= 2
 		return _LogLevel_name_1[_LogLevel_index_1[i]:_LogLevel_index_1[i+1]]
 	default:

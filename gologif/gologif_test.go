@@ -13,7 +13,7 @@ import (
 	"github.com/shimt/go-logif"
 )
 
-func Test_logger_Debug(t *testing.T) {
+func Test_Logger_Debug(t *testing.T) {
 	type args struct {
 		v []interface{}
 	}
@@ -34,13 +34,13 @@ func Test_logger_Debug(t *testing.T) {
 			l.Debug(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Debug = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Debug = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Debugf(t *testing.T) {
+func Test_Logger_Debugf(t *testing.T) {
 	type args struct {
 		f string
 		v []interface{}
@@ -63,13 +63,13 @@ func Test_logger_Debugf(t *testing.T) {
 			l.Debugf(tt.args.f, tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Debugf = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Debugf = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Debugln(t *testing.T) {
+func Test_Logger_Debugln(t *testing.T) {
 	type args struct {
 		v []interface{}
 	}
@@ -90,13 +90,13 @@ func Test_logger_Debugln(t *testing.T) {
 			l.Debugln(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Debugln = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Debugln = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Info(t *testing.T) {
+func Test_Logger_Info(t *testing.T) {
 	type args struct {
 		v []interface{}
 	}
@@ -117,13 +117,13 @@ func Test_logger_Info(t *testing.T) {
 			l.Info(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Info = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Info = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Infof(t *testing.T) {
+func Test_Logger_Infof(t *testing.T) {
 	type args struct {
 		f string
 		v []interface{}
@@ -146,13 +146,13 @@ func Test_logger_Infof(t *testing.T) {
 			l.Infof(tt.args.f, tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Infof = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Infof = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Infoln(t *testing.T) {
+func Test_Logger_Infoln(t *testing.T) {
 	type args struct {
 		v []interface{}
 	}
@@ -173,13 +173,13 @@ func Test_logger_Infoln(t *testing.T) {
 			l.Infoln(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Infoln = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Infoln = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Warn(t *testing.T) {
+func Test_Logger_Warn(t *testing.T) {
 	type args struct {
 		v []interface{}
 	}
@@ -199,13 +199,13 @@ func Test_logger_Warn(t *testing.T) {
 			l.Warn(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Warn = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Warn = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Warnf(t *testing.T) {
+func Test_Logger_Warnf(t *testing.T) {
 	type args struct {
 		f string
 		v []interface{}
@@ -227,13 +227,13 @@ func Test_logger_Warnf(t *testing.T) {
 			l.Warnf(tt.args.f, tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Warnf = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Warnf = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Warnln(t *testing.T) {
+func Test_Logger_Warnln(t *testing.T) {
 	type args struct {
 		v []interface{}
 	}
@@ -253,13 +253,13 @@ func Test_logger_Warnln(t *testing.T) {
 			l.Warnln(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Warnln = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Warnln = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Error(t *testing.T) {
+func Test_Logger_Error(t *testing.T) {
 	type args struct {
 		v []interface{}
 	}
@@ -279,13 +279,13 @@ func Test_logger_Error(t *testing.T) {
 			l.Error(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Error = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Error = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Errorf(t *testing.T) {
+func Test_Logger_Errorf(t *testing.T) {
 	type args struct {
 		f string
 		v []interface{}
@@ -307,13 +307,13 @@ func Test_logger_Errorf(t *testing.T) {
 			l.Errorf(tt.args.f, tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Errorf = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Errorf = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_logger_Errorln(t *testing.T) {
+func Test_Logger_Errorln(t *testing.T) {
 	type args struct {
 		v []interface{}
 	}
@@ -333,7 +333,7 @@ func Test_logger_Errorln(t *testing.T) {
 			l.Errorln(tt.args.v...)
 
 			if got := b.String(); !strings.HasSuffix(got, tt.want) {
-				t.Errorf("logger.Errorln = %v, want %v", got, tt.want)
+				t.Errorf("Logger.Errorln = %v, want %v", got, tt.want)
 			}
 		})
 	}
