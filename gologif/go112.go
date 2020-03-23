@@ -4,7 +4,6 @@
 
 // +build go1.12
 
-// Package gologif is wrapper of a standard "log" package.
 package gologif
 
 import "io"
